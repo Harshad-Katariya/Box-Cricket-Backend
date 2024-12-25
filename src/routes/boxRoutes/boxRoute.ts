@@ -32,6 +32,11 @@ class BoxRoute{
 
         /* Get My Box Cricket Route */
         this.route.get('/myboxcricket',Get_my_box_cricket.getmyboxcricket)
+
+
+
+        /* Update Route */
+        this.route.put('/timeupdate',Add_Box.addboxupdate)
     }
 }
 

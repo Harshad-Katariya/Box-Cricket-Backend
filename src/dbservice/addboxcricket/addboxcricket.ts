@@ -20,5 +20,16 @@ export class Add_Box_Cricket extends CommanDBService {
 
         return result[0]
     }
+
+    /* Update */
+
+    public async updatetime (open_time:any,close_time:any,box_id:number): Promise<any>{
+
+        let update_time_qurey = 'UPDATE tbl_box SET open_time = ?,close_time = ? WHERE box_id = ?'
+
+        let result = await writeConnection.update(update_time_qurey,[open_time,close_time,box_id])
+
+        console.log("resulr  = = = = = = = = = = >",result);
+        return result
+    }
 }
- 

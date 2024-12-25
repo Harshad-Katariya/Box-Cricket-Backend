@@ -44,3 +44,10 @@ export interface GetMyBooking {
     user_id:number,
     box_id:number
 }
+
+/* Update Box Cricket Model */
+export interface UpdateTimeModel {
+    open_time: string,
+    close_time:string,
+    box_id:number,
+}
