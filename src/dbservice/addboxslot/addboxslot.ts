@@ -19,5 +19,6 @@ export class Add_Box_Slot extends CommanDBService {
         let result = await readConnection.select(get_slot_qurey, [slot_id]);
 
         return result
+        
     }
 }

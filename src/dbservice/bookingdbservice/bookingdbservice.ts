@@ -47,7 +47,6 @@ export class BookingDBService extends CommanDBService {
         else if (data.filter === 'tomorrow') {
             Get_Date = moment().add(1, "days").format('YYYY-MM-DD')
             get_my_booking += ` AND tob.booking_date = "${Get_Date}" ORDER BY tob.start_time ASC`
-            console.log("Tomorrow = = = = >", Get_Date);
         }
         else if (data.filter === 'upcoming') {
             get_my_booking += " AND tob.booking_date > CURRENT_DATE() ORDER BY tob.start_time ASC"

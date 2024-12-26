@@ -31,16 +31,18 @@ class BookingBoxCricket{
           
           /* Booking Box Model */
           const bookingBox: BookingBoxModel = {
-            booking_num: BookingNumGenrate(),
+            booking_num: BookingNumGenrate(4),
             booking_date: TimeConvert.booking_date,
             start_time: TimeConvert.start_time,
             end_time: TimeConvert.end_time,
             mobile_num:req.body.mobile_num,
+            booking_type:req.body.booking_type,
             user_id: parseInt(token_decode),
             slot_id:parseInt(req.body.slot_id),
             box_id: req.body.box_id
           }
-
+          console.log("Booking num = = = >",bookingBox['booking_num']);
+          
           /* Find Box Cricket Using Box Cricket ID */
           let find_box = await DBservice.addboxDBservice.getbox(bookingBox.box_id)
           console.log("Find Box  = = = = = >", find_box);

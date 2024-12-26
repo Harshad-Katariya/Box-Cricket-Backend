@@ -43,12 +43,27 @@ class Get_My_Booking {
                 })
                 i++;
             }
+        
             if(!result){
-                response.setResponse(400,{errorMessage:'Somthing wengt wrong'},res,req)
+               return response.setResponse(400,{errorMessage:'Somthing wengt wrong'},res,req)
+            }
+            else if(data.filter==='upcoming' && result.length===0){
+                return response.setResponse(200,{errorMessage:'There are no upcoming bookings available in your schedule.'},res,req)
+            }
+            else if(data.filter==='yesterday' && result.length===0){
+                return response.setResponse(200,{errorsMessage:'There are no bookings from yesterday in the system'},res,req)
+            }
+            else if(data.filter==='tomorrow' && result.length===0){
+                return response.setResponse(200,{errorMessage:'No bookings are scheduled for tomorrow.'},res,req)
+            }
+            else if(data.filter==='today' && result.length===0){
+                return response.setResponse(200,{errorMessage:"No bookings have been recorded for today's date."},res,req)
             }
             else{
                 response.setResponse(200,{SuccessMessage:'Success',data:resp},res,req)
             }
+
+            
         } catch (error) {
             console.log("Get My Booking Error = = = =>",error);
            return response.setResponse(500,{errorMessage:'Internal Server Error'},res,req)

@@ -20,6 +20,14 @@ export class Add_Box_Cricket extends CommanDBService {
 
         return result[0]
     }
+    public async checkBox (user_id:number): Promise<any>{
+        
+        let check_box_qurey = 'SELECT * FROM tbl_box WHERE user_id = ?'
+        
+        let result = await  readConnection.select(check_box_qurey,[user_id])
+
+        return result
+    }
 
     /* Update */
 

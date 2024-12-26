@@ -1,7 +1,7 @@
 import { check } from "express-validator";
 
 exports.booking = () => {
-    return[
+    return[    
     check('user_id')
         .notEmpty()
         .withMessage('user_id is require')

@@ -5,7 +5,8 @@ import {Add_Box_Slot} from '../../controller/addboxslot/addboxslot';
 import  {AvailableTime} from '../../controller/availableTime/availableTime';
 import {Get_Booking} from '../../controller/getmybooking/getmybooking'
 import { Get_my_box_cricket } from "../../controller/getmyboxcricket/getmybox";
-
+import {is_box_verify} from "../../middleware/is_box";
+import {manual_booking} from "../../controller/manualbooking/manualbooking"
 const boxcricketValidator = require('../../validator/boxcricketValidator/boxValidator')
 
 class BoxRoute{
@@ -28,12 +29,13 @@ class BoxRoute{
         this.route.get('/available',AvailableTime.available_time)
 
         /* Get My Booking Route*/
-        this.route.get('/mybooking', boxcricketValidator.box(),Get_Booking.getmybooking)
+        this.route.get('/mybooking',is_box_verify.box_cricket_check,boxcricketValidator.box(),Get_Booking.getmybooking)
 
         /* Get My Box Cricket Route */
         this.route.get('/myboxcricket',Get_my_box_cricket.getmyboxcricket)
 
-
+        /* Manual Booking Box Cricket Route*/
+        this.route.post('/manualbooking',manual_booking.manualbooking)
 
         /* Update Route */
         this.route.put('/timeupdate',Add_Box.addboxupdate)
