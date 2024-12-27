@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CookieParser } from "../../comman/cookies";
 import { DBservice } from "../../dbservice/dbservice";
 import jwt from "jsonwebtoken";
-import { GetMyBooking } from "../../model/boxModel/bookingModel";
+import { GetMyBooking } from "../../model/boxModel/boxCricketModel";
 import { response } from "../../helper/response";
 import moment from "moment";
 import { validationResult } from "express-validator"; 

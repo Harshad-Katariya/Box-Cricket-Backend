@@ -4,7 +4,7 @@ import { response } from "../../helper/response";
 import moment from 'moment';
 import { CookieParser } from "../../comman/cookies";
 import jwt from "jsonwebtoken";
-import { AddBoxModel, UpdateTimeModel } from '../../model/boxModel/bookingModel'
+import { AddBoxModel, UpdateTimeModel } from '../../model/boxModel/boxCricketModel'
 import { writeConnection } from "../../config/writeDbConnection";
 
 class AddBox {

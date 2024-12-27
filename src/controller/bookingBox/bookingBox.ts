@@ -3,7 +3,7 @@ import { DBservice } from "../../dbservice/dbservice";
 import { response } from "../../helper/response";
 import moment from 'moment';
 import jwt from "jsonwebtoken";
-import { BookingBoxModel } from '../../model/boxModel/bookingModel'
+import { BookingBoxModel } from '../../model/boxModel/boxCricketModel'
 import { writeConnection } from "../../config/writeDbConnection";
 import { CookieParser } from "../../comman/cookies";
 import { MailServiceBooking } from "../../helper/mail/bookingMail";
@@ -66,7 +66,7 @@ class BookingBoxCricket{
             let result = await DBservice.bookDbservice.bookingbox(bookingBox)
             if(!result){
               await writeConnection.rollback()
-              return response.setResponse(400,{errorMessage:'Somthing Went Wrong.'},res,req)
+              return response.setResponse(400,{errorMessage:'Somthing went erong.'},res,req)
             }
             else{
               let find_user = await DBservice.userDBservice.finduser(parseInt(token_decode))

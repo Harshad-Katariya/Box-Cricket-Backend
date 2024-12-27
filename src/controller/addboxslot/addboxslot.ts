@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jwt from 'jsonwebtoken'
 import { CookieParser } from "../../comman/cookies";
-import { AddSlotModel } from "../../model/boxModel/bookingModel";
+import { AddSlotModel } from "../../model/boxModel/boxCricketModel";
 import { DBservice } from "../../dbservice/dbservice";
 import { response } from "../../helper/response";
 import { writeConnection } from "../../config/writeDbConnection";

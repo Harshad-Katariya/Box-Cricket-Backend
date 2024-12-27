@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken"
 import { DBservice } from "../../dbservice/dbservice";
 import { CookieParser } from "../../comman/cookies";
-import { BookingBoxModel } from '../../model/boxModel/bookingModel'
+import { BookingBoxModel } from '../../model/boxModel/boxCricketModel'
 import { writeConnection } from "../../config/writeDbConnection";
 import { MailServiceBooking } from "../../helper/mail/bookingMail";
 import { BookingNumGenrate } from '../../helper/custom';

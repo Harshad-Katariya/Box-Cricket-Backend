@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { DBservice } from "../../dbservice/dbservice";
 import moment from 'moment';
-import { AvailableTimeModel } from '../../model/boxModel/bookingModel'
+import { AvailableTimeModel } from '../../model/boxModel/boxCricketModel'
 import { response } from "../../helper/response";
 
 
