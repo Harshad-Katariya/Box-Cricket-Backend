@@ -11,7 +11,7 @@ export class Available_Time extends CommanDBService {
 
         let result = await readConnection.select(get_avalible_time_qurey, [box_id, date, slot_id])
         
-        console.log("Qurey Time= = = =>", get_avalible_time_qurey, [date, box_id]);
+        // console.log("Qurey Time= = = =>", get_avalible_time_qurey, [date, box_id]);
 
         return result
     }

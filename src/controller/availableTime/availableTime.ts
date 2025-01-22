@@ -10,11 +10,12 @@ class Available_Time {
     public async available_time(req: Request, res: Response): Promise<any> {
         try {
 
-            let {date,hours,slot_id,box_id}:any   = req.query;
-             date = moment(date, 'DD-MM-YYYY').format("YYYY-MM-DD")
+            let {date,hours,slot_id,box_id}:any = req.query;
+            //  date = moment(date, 'DD-MM-YYYY').format("YYYY-MM-DD")
 
             let get_avalible_time = await DBservice.availableDBservice.getavalibletime(date,box_id,slot_id)
-
+            console.log('get_avalible_time >',get_avalible_time);
+            
             /* Show Only Available Slot */
             const Available_Slot = get_avalible_time.filter(item => item.slot_status === "Available");
             let result = []
@@ -42,6 +43,8 @@ class Available_Time {
                                     "slot_end": moment(Available_Slot[i + 1].slot_end, 'HH:mm').format('hh:mm A'),
                                     "slot_status": "Available"
                                 })
+                                console.log("alskdbvfashfdfc = = = = = = = = = = = = = = = = = = = = = = = = = = = = >",result);
+                                
                             }
                             i = i + 1
                             k = i
@@ -63,12 +66,11 @@ class Available_Time {
                     })
                     i++;
                 }
+                console.log("rresult checkj  = = = = = = >",result);
+                
             }
             if (result.length > 0) {
                 response.setResponse(200, { SuccessMessage: 'Success', data: result }, res, req)
-            }
-            else {
-                response.setResponse(200, {SuccessMessage:'Success'}, res, req)
             }
         } catch (error) {
             console.log("Error For Available Time = = = >", error);

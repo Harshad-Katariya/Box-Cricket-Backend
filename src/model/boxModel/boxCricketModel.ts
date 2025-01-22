@@ -47,6 +47,16 @@ export interface AvailableTimeModel {
     // box_id: number
 }
 
+export interface SlotModel{
+    slot_id:number,
+    slot_name:string,
+    slot_media:string,
+    width:string,
+    heigth:string,
+    length:string,
+    price:number,
+}
+
 export interface GetMyBooking {
     user_id: number,
     box_id: number

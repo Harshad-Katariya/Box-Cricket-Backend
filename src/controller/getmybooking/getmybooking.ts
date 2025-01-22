@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CookieParser } from "../../comman/cookies";
 import { DBservice } from "../../dbservice/dbservice";
 import jwt from "jsonwebtoken";
-import { GetboxCricketById, GetMyBooking } from "../../model/boxModel/boxCricketModel";
+import { GetboxCricketById, GetMyBooking, SlotModel } from "../../model/boxModel/boxCricketModel";
 import { response } from "../../helper/response";
 import moment from "moment";
 import { validationResult } from "express-validator"; 
@@ -98,17 +98,17 @@ class Get_My_Booking {
                     })
                 }   
 
-                const slot_data = {
-                    slot_id:result[i].slot_id,
+                const slot_data:SlotModel = {
+                    slot_id:parseInt(result[i].slot_id),
                     slot_name:result[i].slot_name,
                     slot_media:result[i].slot_media,
                     heigth:result[i].heigth,
                     width:result[i].width,
                     length:result[i].length,
-                    price:result[i].price
+                    price:parseInt(result[i].price)
                 }
 
-                if(!resp_object[box_id]){
+                if(!resp_object[box_id] && resp_object !=null && resp_object != undefined){
                     resp_object[box_id] = {
                         box_id:result[i].box_id,
                         box_name:result[i].title,
