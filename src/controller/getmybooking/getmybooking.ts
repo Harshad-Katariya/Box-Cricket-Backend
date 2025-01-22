@@ -90,7 +90,7 @@ class Get_My_Booking {
             let amenities_icon = result[i].amenities_icon ? result[i].amenities_icon.split(',').map((icon: string) => icon.split('/#/')[1]): [];
             let amenities_name = result[i].amenities_name ? result[i].amenities_name.split(',').map((name: string) => name.split('/#/')[1]): [];
             let amenities_array:any = []
-            let slot_data_array = []
+
                 for(let i=0; i < amenities_icon.length;i++){
                     amenities_array.push({
                         amenities_icon:amenities_icon[i],
@@ -112,6 +112,9 @@ class Get_My_Booking {
                     resp_object[box_id] = {
                         box_id:result[i].box_id,
                         box_name:result[i].title,
+                        box_address:result[i].address,
+                        box_open_time:result[i].open_time,
+                        box_close_time:result[i].close_time,
                         slots:[],
                         amenitie:amenities_array
                     }

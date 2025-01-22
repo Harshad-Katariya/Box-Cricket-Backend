@@ -5,7 +5,6 @@ export interface AddBoxModel {
     address: string,
     city_id: number,
     state_id: number,
-    // country_id: number,
     contact_num: number,
     amenities_id:number,
     box_id:number,
