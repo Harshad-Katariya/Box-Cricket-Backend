@@ -10,10 +10,13 @@ import cors from 'cors';
 import indexRoute from './Routes/indexRoute';
 
 dotenv.config()
-// const corsOptions = {
-//     origin: 'http://127.0.0.1:5500', 
-//     credentials: true, 
-//   };
+const corsOptions = {
+    origin: "http://harshad.com:7000", 
+    credentials: true,
+  };
+
+const originalPath = path.resolve(__dirname, '../Uploads'); // Adjust the relative path
+const iconpath = path.resolve(__dirname,'../icon')
 export default class Server
 {
     public app:Application
@@ -35,12 +38,14 @@ export default class Server
        
         this.app.use(morgan('combined',{stream: accessLogStream}));
         this.app.use(express.json())
-        this.app.use('/uploads',express.static(path.join(__dirname,'Uploads')))
+        this.app.use(express.urlencoded({ extended: true }))
         this.app.use(cookieParser())
         this.app.use(bodyParser.urlencoded({extended:true}))
-        this.app.use(cors())
+        this.app.use(cors(corsOptions))
         this.app.set("view engine", "ejs")
         this.app.set("views", __dirname + "/views")
+        this.app.use('/uploads',express.static(originalPath))
+        this.app.use('/icon',express.static(iconpath))
         this.app.use(express.static(path.join(__dirname, 'public')));
         this.app.use((req:Request,res:Response,next:NextFunction) =>
         {

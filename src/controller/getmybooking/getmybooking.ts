@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CookieParser } from "../../comman/cookies";
 import { DBservice } from "../../dbservice/dbservice";
 import jwt from "jsonwebtoken";
-import { GetMyBooking } from "../../model/boxModel/boxCricketModel";
+import { GetboxCricketById, GetMyBooking } from "../../model/boxModel/boxCricketModel";
 import { response } from "../../helper/response";
 import moment from "moment";
 import { validationResult } from "express-validator"; 
@@ -27,7 +27,7 @@ class Get_My_Booking {
                 box_id:parseInt(req.body.box_id)
             }
             let data = req.query
-            let resp = []
+            let resp:any = []
             let result = await DBservice.bookDbservice.getmybooking(get_my_booking["user_id"],get_my_booking["box_id"],data)
             let i=0;
             while(i < result.length){
@@ -69,6 +69,49 @@ class Get_My_Booking {
            return response.setResponse(500,{errorMessage:'Internal Server Error'},res,req)
         }
        
+    }
+
+    public async getboxcricketbiyid (req:Request,res:Response): Promise<any>{
+
+        let data:any = req.query.box_id
+
+        let result = await DBservice.addboxDBservice.getboxcricketbyid(data)
+
+         
+        console.log("Check Result From Box Cricket click  = = = = = = = >",result);
+         
+        let resp = {}
+        
+        for(let i=0; i < result.length; i++){
+        
+            let amenities_icon = result[i].amenities_icon ? result[i].amenities_icon.split(',').map((icon: string) => icon.split('/#/')[1]): [];
+            let amenities_name = result[i].amenities_name ? result[i].amenities_name.split(',').map((name: string) => name.split('/#/')[1]): [];
+            let amenities_array:any = []
+                for(let i=0; i < amenities_icon.length;i++){
+                    amenities_array.push({
+                        amenities_icon:amenities_icon[i],
+                        amenities_name:amenities_name[i]
+                    })
+                }   
+
+                let box_data= {
+                    box_id:parseInt(result[i].box_id),
+                    box_name:result[i].title,
+                    amenitie:amenities_array,
+                    slot_id:result[i].slot_id,
+                    slot_name:result[i].slot_name,
+                    slot_media:result[i].slot_media,
+                    heigth:result[i].heigth,
+                    width:result[i].width,
+                    length:result[i].length,
+                    price:result[i].price
+
+                }
+                console.log("Box Data = = = = = == = =>",box_data);
+                // console.log("amenities Array = = = = = = = = = = = = >",amenities_array);    
+                result[i]= (box_data) 
+        }
+        response.setResponse(200,{SuccessMessage:'Success',data:result},res,req)
     }
 }
 

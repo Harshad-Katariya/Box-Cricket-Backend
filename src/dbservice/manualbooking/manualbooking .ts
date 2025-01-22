@@ -2,7 +2,7 @@ import { readConnection } from "../../config/readDbConnection";
 import { writeConnection } from "../../config/writeDbConnection";
 import { CommanDBService } from "../commandbservice";
 
-export class ManualBookingDBservice{
+export class ManualBookingDBservice extends CommanDBService{
 
     public async manualbooking (data:any): Promise<any>{
  

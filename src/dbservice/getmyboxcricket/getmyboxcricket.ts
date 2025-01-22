@@ -2,7 +2,7 @@ import { readConnection } from "../../config/readDbConnection";
 import { writeConnection } from "../../config/writeDbConnection";
 import { CommanDBService } from "../commandbservice";
 
-export class Get_My_Box_Cricket {
+export class Get_My_Box_Cricket  extends CommanDBService {
 
     public async getmybox (data:any) : Promise<any>{
 

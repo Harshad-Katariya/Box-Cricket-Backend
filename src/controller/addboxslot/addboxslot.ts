@@ -16,9 +16,21 @@ class AddBoxSlot {
             let cookie_decode: any = CookieParser.UserCookie(req);
             let token_decode: any = jwt.verify(cookie_decode, process.env.JWT_KEY as string);
 
+            const files:any = req.files as unknown as { [fieldname: string]: Express.Multer.File[] };
+
+            let slot_image_array:any = []
+            let i=0;
+            while(i < files.length){
+                let filePath = files[i].path.replace(/\\/g, '/');
+                filePath = `http://${process.env.HOST}:${process.env.PORT_NUM}/${filePath}`
+                slot_image_array.push(filePath)
+                i++;
+            }
+            
             /* Add Box Cricket Slot Model */
             const addSlot: AddSlotModel = {
                 slot_name:req.body.slot_name,
+                slot_media:JSON.stringify(slot_image_array),
                 width: req.body.width,
                 heigth: req.body.heigth,
                 length: req.body.length,
@@ -26,8 +38,10 @@ class AddBoxSlot {
                 user_id: parseInt(token_decode),
                 box_id: parseInt(req.body.box_id)
             }
-
             await writeConnection.startTransaction()
+
+            console.log("Add Slot Image - = = = = =>",addSlot);
+            
 
             let result = await DBservice.addslotDBservice.addboxslot(addSlot)
 

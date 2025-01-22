@@ -28,8 +28,9 @@ class LoginUser {
              let expire = 30 * 24 * 60 * 60 * 1000
              if(password_match){
                 let token_encode:any = jwt.sign(user_email_check.user_id,process.env.JWT_KEY as string)
-                res.cookie(process.env.COOKIE_USER as any, token_encode, { httpOnly: true, domain:process.env.HOST,secure:false, maxAge: expire}) 
+                res.cookie(process.env.COOKIE_USER as any, token_encode, { httpOnly: true, domain:process.env.HOST,secure:false, maxAge: expire})
                  response.setResponse(200,{SuccessMessage:'Login SuccessFully'},res,req)
+                 
              }
              else{
                  response.setResponse(400,{errorMessage:'Invalid Email And Password'},res,req)

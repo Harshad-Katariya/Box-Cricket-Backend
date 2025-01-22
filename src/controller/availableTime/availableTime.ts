@@ -10,21 +10,17 @@ class Available_Time {
     public async available_time(req: Request, res: Response): Promise<any> {
         try {
 
-            /* Available Time Payload */
-            const Available_Time: AvailableTimeModel = {
-                date: moment(req.body.date, 'DD-MM-YYYY').format("YYYY-MM-DD"),
-                hours: req.body.hours,
-                slot_id: req.body.slot_id,
-                box_id: req.body.box_id
-            }
-            let get_avalible_time = await DBservice.availableDBservice.getavalibletime(Available_Time['date'], Available_Time['box_id'], Available_Time['slot_id'])
+            let {date,hours,slot_id,box_id}:any   = req.query;
+             date = moment(date, 'DD-MM-YYYY').format("YYYY-MM-DD")
+
+            let get_avalible_time = await DBservice.availableDBservice.getavalibletime(date,box_id,slot_id)
 
             /* Show Only Available Slot */
             const Available_Slot = get_avalible_time.filter(item => item.slot_status === "Available");
             let result = []
 
             /* Get Hours From User */
-            let hour = Available_Time['hours']
+            let hour = hours
 
             if (hour > 1) {
                 let i = 0
@@ -72,7 +68,7 @@ class Available_Time {
                 response.setResponse(200, { SuccessMessage: 'Success', data: result }, res, req)
             }
             else {
-                return response.setResponse(400, { errorMessage: "No bookings have been recorded for today's date." }, res, req)
+                response.setResponse(200, {SuccessMessage:'Success'}, res, req)
             }
         } catch (error) {
             console.log("Error For Available Time = = = >", error);
