@@ -6,6 +6,7 @@ import { GetboxCricketById, GetMyBooking } from "../../model/boxModel/boxCricket
 import { response } from "../../helper/response";
 import moment from "moment";
 import { validationResult } from "express-validator"; 
+import { amenities } from "../amenities/amenities";
 
 class Get_My_Booking {
 
@@ -80,13 +81,16 @@ class Get_My_Booking {
          
         console.log("Check Result From Box Cricket click  = = = = = = = >",result);
          
-        let resp = {}
+        let resp_object = {}
         
         for(let i=0; i < result.length; i++){
-        
+            
+            const box_id = parseInt(result[i].box_id)
+
             let amenities_icon = result[i].amenities_icon ? result[i].amenities_icon.split(',').map((icon: string) => icon.split('/#/')[1]): [];
             let amenities_name = result[i].amenities_name ? result[i].amenities_name.split(',').map((name: string) => name.split('/#/')[1]): [];
             let amenities_array:any = []
+            let slot_data_array = []
                 for(let i=0; i < amenities_icon.length;i++){
                     amenities_array.push({
                         amenities_icon:amenities_icon[i],
@@ -94,10 +98,7 @@ class Get_My_Booking {
                     })
                 }   
 
-                let box_data= {
-                    box_id:parseInt(result[i].box_id),
-                    box_name:result[i].title,
-                    amenitie:amenities_array,
+                const slot_data = {
                     slot_id:result[i].slot_id,
                     slot_name:result[i].slot_name,
                     slot_media:result[i].slot_media,
@@ -105,13 +106,22 @@ class Get_My_Booking {
                     width:result[i].width,
                     length:result[i].length,
                     price:result[i].price
-
                 }
-                console.log("Box Data = = = = = == = =>",box_data);
-                // console.log("amenities Array = = = = = = = = = = = = >",amenities_array);    
-                result[i]= (box_data) 
+
+                if(!resp_object[box_id]){
+                    resp_object[box_id] = {
+                        box_id:result[i].box_id,
+                        box_name:result[i].title,
+                        slots:[],
+                        amenitie:amenities_array
+                    }
+                }
+
+                resp_object[box_id].slots.push(slot_data)
+                
         }
-        response.setResponse(200,{SuccessMessage:'Success',data:result},res,req)
+        const resp = Object.values(resp_object)
+        response.setResponse(200,{SuccessMessage:'Success',data:resp},res,req)
     }
 }
 
