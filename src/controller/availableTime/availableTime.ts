@@ -11,8 +11,7 @@ class Available_Time {
         try {
 
             let {date,hours,slot_id,box_id}:any = req.query;
-            //  date = moment(date, 'DD-MM-YYYY').format("YYYY-MM-DD")
-
+    
             let get_avalible_time = await DBservice.availableDBservice.getavalibletime(date,box_id,slot_id)
             console.log('get_avalible_time >',get_avalible_time);
             
@@ -37,14 +36,10 @@ class Available_Time {
 
                             if (hour == (j + 2)) {
                                 result.push({
-                                    "slot_date": moment(Available_Slot[i]['slot_date']).format('DD-MM-YYYY'),
-                                    "box_id": Available_Slot[i].box_id,
                                     "slot_start": slot_start,
                                     "slot_end": moment(Available_Slot[i + 1].slot_end, 'HH:mm').format('hh:mm A'),
                                     "slot_status": "Available"
-                                })
-                                console.log("alskdbvfashfdfc = = = = = = = = = = = = = = = = = = = = = = = = = = = = >",result);
-                                
+                                })                        
                             }
                             i = i + 1
                             k = i
@@ -58,19 +53,18 @@ class Available_Time {
                 let i = 0;
                 while (i < Available_Slot.length) {
                     result.push({
-                        "slot_date": moment(Available_Slot[i]['slot_date']).format('DD-MM-YYYY'),
-                        "box_id": Available_Slot[i].box_id,
                         "slot_start": moment(Available_Slot[i]['slot_start'], 'HH:mm').format('hh:mm A'),
                         "slot_end": moment(Available_Slot[i]['slot_end'], 'HH:mm').format('hh:mm A'),
                         "slot_status": Available_Slot[i]['slot_status']
                     })
                     i++;
-                }
-                console.log("rresult checkj  = = = = = = >",result);
-                
+                }   
             }
             if (result.length > 0) {
                 response.setResponse(200, { SuccessMessage: 'Success', data: result }, res, req)
+            }
+            else{
+               return response.setResponse(204,{errorMessage:'No Slot Available'},res,req)
             }
         } catch (error) {
             console.log("Error For Available Time = = = >", error);
