@@ -36,7 +36,7 @@ class BookingBoxCricket{
             start_time: TimeConvert.start_time,
             end_time: TimeConvert.end_time,
             mobile_num:req.body.mobile_num,
-            booking_type:req.body.booking_type,
+            // booking_type:req.body.booking_type,
             user_id: parseInt(token_decode),
             slot_id:parseInt(req.body.slot_id),
             box_id: req.body.box_id
