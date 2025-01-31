@@ -62,7 +62,7 @@ export class Add_Box_Cricket extends CommanDBService {
     }
     public async getbox(box_id: number): Promise<any> {
 
-        let get_box_qurey = 'SELECT * FROM tbl_box WHERE box_id = ?';
+        let get_box_qurey = 'SELECT tbx.box_id,tbx.title,tbx.open_time,tbx.close_time,tbx.address,tbx.latitude,tbx.longitude,ts.slot_id,ts.slot_name FROM tbl_box as tbx LEFT JOIN tbl_slot as ts ON ts.box_id = tbx.box_id WHERE tbx.box_id = ?';
 
         let result = await readConnection.select(get_box_qurey, [box_id])
 

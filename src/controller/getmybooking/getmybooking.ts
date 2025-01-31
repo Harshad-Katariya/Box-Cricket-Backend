@@ -40,7 +40,7 @@ class Get_My_Booking {
                     end_time: moment(result_data['end_time'],'HH:mm').format('hh:mm A'),
                     slot_name: result_data['slot_name'],
                     username: result_data['username'],
-                    mobile_num: result_data['mobile_num']
+                    // mobile_num: result_data['mobile_num']
                 })
                 i++;
             }

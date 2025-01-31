@@ -26,6 +26,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.11.4",
     "nodemailer": "^6.9.16",
+    "razorpay": "^2.9.5",
     "reflect-metadata": "^0.2.2",
     "rotating-file-stream": "^3.2.5",
     "ts-node": "^10.9.2",

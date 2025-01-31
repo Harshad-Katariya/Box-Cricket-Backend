@@ -23,7 +23,7 @@ class BookingBoxCricket{
           /* Convert Date And Time  */
           const { start_time, end_time, booking_date,hours} = req.body;
           const TimeConvert = {
-            booking_date: moment(booking_date, "DD-MM-YYYY").format('YYYY-MM-DD'),
+            booking_date: moment(booking_date).format('YYYY-MM-DD'),
             start_time: moment(start_time, "hh:mm A").format('HH:mm'),
             end_time: moment(end_time, "hh:mm A").format('HH:mm'),
             hours: moment(hours, "hh:mm A").format('HH:mm'),
@@ -32,17 +32,17 @@ class BookingBoxCricket{
           /* Booking Box Model */
           const bookingBox: BookingBoxModel = {
             booking_num: BookingNumGenrate(4),
-            booking_date: TimeConvert.booking_date,
-            start_time: TimeConvert.start_time,
-            end_time: TimeConvert.end_time,
-            mobile_num:req.body.mobile_num,
-            // booking_type:req.body.booking_type,
+            booking_date:TimeConvert.booking_date,
+            start_time:TimeConvert.start_time,
+            end_time:TimeConvert.end_time,
             user_id: parseInt(token_decode),
             slot_id:parseInt(req.body.slot_id),
-            box_id: req.body.box_id
+            box_id: parseInt(req.body.box_id)
           }
           console.log("Booking num = = = >",bookingBox['booking_num']);
+          console.log("booking Box Payload  - - -- >",bookingBox);
           
+
           /* Find Box Cricket Using Box Cricket ID */
           let find_box = await DBservice.addboxDBservice.getbox(bookingBox.box_id)
           console.log("Find Box  = = = = = >", find_box);
@@ -71,8 +71,8 @@ class BookingBoxCricket{
             else{
               let find_user = await DBservice.userDBservice.finduser(parseInt(token_decode))
               console.log("date  = = =>0",booking_date);
-              
-              MailServiceBooking(find_user[0].email, find_user[0].username, bookingBox.booking_num,booking_date, start_time, end_time, find_box.address, find_box.title, find_box.latitude, find_box.longitude)
+          
+              MailServiceBooking(find_user[0].email, find_user[0].username, bookingBox.booking_num,moment(booking_date).format('DD-MM-YYYY'), start_time, end_time, find_box.address,find_box.slot_name,find_box.title, find_box.latitude, find_box.longitude)
               await writeConnection.commit()
               response.setResponse(200, { SuccessMessage: 'Success', data: bookingBox }, res, req)
             }

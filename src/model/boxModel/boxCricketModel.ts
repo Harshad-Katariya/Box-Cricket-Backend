@@ -22,7 +22,7 @@ export interface BookingBoxModel {
     booking_date: string,
     start_time: string,
     end_time: string,
-    mobile_num: string,
+    // mobile_num: string,
     user_id: number,
     slot_id: number,
     box_id: number

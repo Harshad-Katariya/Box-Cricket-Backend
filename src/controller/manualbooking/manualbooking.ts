@@ -29,8 +29,6 @@ class Manual_Booking {
           booking_date: TimeConvert.booking_date,
           start_time: TimeConvert.start_time,
           end_time: TimeConvert.end_time,
-          mobile_num:req.body.mobile_num,
-          // booking_type:req.body.booking_type,
           user_id:req.body.user_id,
           slot_id:parseInt(req.body.slot_id),
           box_id:parseInt(req.body.box_id)

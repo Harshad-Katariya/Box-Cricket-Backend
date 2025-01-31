@@ -11,11 +11,11 @@
       padding: 0;
       font-family: 'Arial', sans-serif;
       background-color: #ffffff;
-      color:#001fff;
+      color:#000000;
     }
 
     .header {
-      background: #333;
+      background: #000000;
       color: #ffffff;
       text-align: center;
       padding: 20px;
@@ -32,7 +32,7 @@
     }
 
     .content h2 {
-      color: #185a9d;
+      color: #000000;
       margin-bottom: 10px;
       font-size: 18px;
     }
@@ -57,7 +57,7 @@
     }
 
     .details strong {
-      color: #185a9d;
+      color: #000000;
     }
 
     .button {
@@ -68,7 +68,7 @@
     .button a {
       display: inline-block;
       padding: 10px 20px;
-      background: #333;
+      background: #000000;
       color: #ffffff;
       text-decoration: none;
       border-radius: 5px;
@@ -84,7 +84,7 @@
 
     .footer-like {
       margin-top: auto;
-      background: #D7E6FE;
+      background: #000000;
       padding: 10px;
       text-align: center;
     }
@@ -92,7 +92,7 @@
     .footer-like p {
       margin: 0;
       font-size: 12px;
-      color: #5892FF;
+      color: #ffffff;
       font-family: 'Arial', sans-serif;
       letter-spacing: 1px;
     }
@@ -106,14 +106,13 @@
     .wrapper-1 {
       margin: 20px auto;
       max-width: 90%;
-      /* box-shadow: 0 0px 16px 1px rgba(174, 199, 251, 1); */
       display: flex;
       flex-direction: column;
       background: #ffffff;
     }
 
     .wrapper-2 {
-      border: 2px solid #aec7fb;
+      border: 2px solid #000000;
       padding: 15px;
       text-align: center;
     }
@@ -189,12 +188,12 @@
             <p><strong>Date :-</strong> {booking_date}</p>
             <p><strong>Time :-</strong> {start_time} To {end_time}</p>
             <p><strong>Box Cricket :-</strong> {title}</p>
-            <!-- <p><strong>Slot :-</strong> {slot_name}</p> -->
+            <p><strong>Slot :-</strong> {slot_name}</p>
             <p><strong>Venue :-</strong> {address}</p>
           </div>
           <p>If you have any questions, please don’t hesitate to contact us.</p>
           <div class="button">
-            <a href="https://www.google.com/maps?q={latitude},{longitude}" target="_blank">View on Google Maps</a>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=&destination={latitude},{longitude}">View on Google Maps</a>
           </div>
         </div>
         <div class="footer-like">

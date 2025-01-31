@@ -4,7 +4,7 @@ import path from 'path';
 const emailTemplatePath = path.join(__dirname, '../../helper/mail/mailTemplate.html');
 
 const template = fs.readFileSync(emailTemplatePath, 'utf-8')
-export const MailServiceBooking = (email: string,username: string,booking_num:string,booking_date:string,start_time:string,end_time:string,address:string,title:string,latitude:string,longitude:string,) => {
+export const MailServiceBooking = (email: string,username: string,booking_num:string,booking_date:string,start_time:string,end_time:string,address:string,slot_name,title:string,latitude:string,longitude:string,) => {
     let htmlcontent = template.replace('{username}', username)
     htmlcontent = htmlcontent.replace('{year}', new Date().getFullYear().toString())
     htmlcontent = htmlcontent.replace('{booking_num}',booking_num)
@@ -12,6 +12,7 @@ export const MailServiceBooking = (email: string,username: string,booking_num:st
     htmlcontent = htmlcontent.replace('{start_time}',start_time)
     htmlcontent = htmlcontent.replace('{end_time}',end_time)
     htmlcontent = htmlcontent.replace('{address}',address)
+    htmlcontent = htmlcontent.replace('{slot_name}',slot_name)
     htmlcontent = htmlcontent.replace('{title}',title)
     htmlcontent = htmlcontent.replace('{latitude}',latitude)
     htmlcontent = htmlcontent.replace('{longitude}',longitude)
