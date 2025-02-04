@@ -1,20 +1,11 @@
-let LastNumber=0;
-// export function BookingNumGenrate () {
 
-//     const prifix = 'B';
-//     LastNumber++;
-//     const formattedNum = LastNumber.toString().padStart(6, '0');
-//     return prifix + formattedNum;
-// }
+export const BookingNumGenerate = () => { 
+    let prefix = 'B';  
+    let number = '';
 
-export const BookingNumGenrate = (length:any) =>{
-
-    let prifix = 'B00';
-
-    for(let i=0; i < length; i++){
-        
-        prifix+=Math.floor(Math.random() * 20)
+    for (let i = 0; i < 4; i++) {  
+        number += Math.floor(Math.random() * 10);
     }
 
-    return prifix
-}
+    return prefix + number;
+};

@@ -5,7 +5,7 @@ import { CookieParser } from "../../comman/cookies";
 import { BookingBoxModel } from '../../model/boxModel/boxCricketModel'
 import { writeConnection } from "../../config/writeDbConnection";
 import { MailServiceBooking } from "../../helper/mail/bookingMail";
-import { BookingNumGenrate } from '../../helper/custom';
+import { BookingNumGenerate } from '../../helper/custom';
 import moment from "moment";
 import { response } from "../../helper/response";
 class Manual_Booking {
@@ -25,10 +25,11 @@ class Manual_Booking {
 
         /* Booking Box Model */
         const bookingBox: BookingBoxModel = {
-          booking_num: BookingNumGenrate(4),
+          booking_num: BookingNumGenerate(),
           booking_date: TimeConvert.booking_date,
           start_time: TimeConvert.start_time,
           end_time: TimeConvert.end_time,
+          amount:req.body.amount,
           user_id:req.body.user_id,
           slot_id:parseInt(req.body.slot_id),
           box_id:parseInt(req.body.box_id)

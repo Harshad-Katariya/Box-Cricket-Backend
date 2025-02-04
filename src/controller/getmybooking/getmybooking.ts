@@ -19,17 +19,14 @@ class Get_My_Booking {
         
         try {
             /* User Coookie And Token Verify */
-            let cookie_decode: any = CookieParser.UserCookie(req);
-            let token_decode: any = jwt.verify(cookie_decode, process.env.JWT_KEY as string);
-    
-            /* Get My Booking Payload And Model */
-            const get_my_booking:GetMyBooking = {
-                user_id:parseInt(token_decode),
-                box_id:parseInt(req.body.box_id)
-            }
+            // let cookie_decode: any = CookieParser.UserCookie(req);
+            // let token_decode: any = jwt.verify(cookie_decode, process.env.JWT_KEY as string);
+
             let data = req.query
             let resp:any = []
-            let result = await DBservice.bookDbservice.getmybooking(get_my_booking["user_id"],get_my_booking["box_id"],data)
+            let result = await DBservice.bookDbservice.getmybooking(data.box_id,data)
+
+            
             let i=0;
             while(i < result.length){
                 let result_data = result[i]
@@ -38,6 +35,7 @@ class Get_My_Booking {
                     booking_date: moment(result_data['booking_date'],'YYYY-MM-DD').format('DD-MM-YYYY'),
                     start_time: moment(result_data['start_time'],'HH:mm').format('hh:mm A'),
                     end_time: moment(result_data['end_time'],'HH:mm').format('hh:mm A'),
+                    amount:result_data['amount'],
                     slot_name: result_data['slot_name'],
                     username: result_data['username'],
                     // mobile_num: result_data['mobile_num']
@@ -52,7 +50,7 @@ class Get_My_Booking {
                 return response.setResponse(200,{errorMessage:'There are no upcoming bookings available in your schedule.'},res,req)
             }
             else if(data.filter==='yesterday' && result.length===0){
-                return response.setResponse(200,{errorsMessage:'There are no bookings from yesterday in the system'},res,req)
+                return response.setResponse(200,{errorMessage:'There are no bookings from yesterday in the system'},res,req)
             }
             else if(data.filter==='tomorrow' && result.length===0){
                 return response.setResponse(200,{errorMessage:'No bookings are scheduled for tomorrow.'},res,req)

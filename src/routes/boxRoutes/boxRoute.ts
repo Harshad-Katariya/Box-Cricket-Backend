@@ -34,7 +34,7 @@ class BoxRoute{
         this.route.get('/available',AvailableTime.available_time)
 
         /* Get My Booking Route*/
-        this.route.get('/mybooking',is_box_verify.box_cricket_check,boxcricketValidator.box(),Get_Booking.getmybooking)
+        this.route.get('/mybooking',boxcricketValidator.box(),Get_Booking.getmybooking)
 
         /* Get My Box Cricket Route */
         this.route.get('/myboxcricket',Get_my_box_cricket.getmyboxcricket)

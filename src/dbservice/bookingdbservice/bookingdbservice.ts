@@ -27,9 +27,9 @@ export class BookingDBService extends CommanDBService {
         return result
     }
 
-    public async getmybooking(user_id: number, box_id: number, data: any): Promise<any> {
+    public async getmybooking(box_id:any, data: any): Promise<any> {
 
-        let get_my_booking = "SELECT tob.booking_num,tob.booking_date,tob.start_time,tob.end_time,ts.slot_name,tu.username,tob.mobile_num FROM tbl_booking AS tob LEFT JOIN tbl_box AS tb ON tb.box_id = tob.box_id LEFT JOIN tbl_slot AS ts ON ts.slot_id = ts.slot_id LEFT JOIN tbl_user AS tu ON tu.user_id = tob.user_id WHERE tob.box_id = ?"
+        let get_my_booking = "SELECT tob.booking_num,tob.booking_date,tob.start_time,tob.end_time,tob.amount,ts.slot_name,tu.username FROM tbl_booking AS tob LEFT JOIN tbl_box AS tb ON tb.box_id = tob.box_id LEFT JOIN tbl_slot AS ts ON ts.slot_id = tob.slot_id LEFT JOIN tbl_user AS tu ON tu.user_id = tob.user_id WHERE tob.box_id = ?"
 
         let Get_Date = moment().format('YYYY-MM-DD')
 
@@ -51,9 +51,13 @@ export class BookingDBService extends CommanDBService {
         else if (data.filter === 'upcoming') {
             get_my_booking += " AND tob.booking_date > CURRENT_DATE() ORDER BY tob.start_time ASC"
         }
+        if(data.q){
+            get_my_booking += ` AND lower(tob.booking_num) LIKE "%${data.q.toLowerCase().trim()}%"`
+        }
 
-        let result = await readConnection.select(get_my_booking, [user_id, box_id, data])
-
+        console.log("Qurey log - - - - >",get_my_booking,data);
+        
+        let result = await readConnection.select(get_my_booking, [box_id, data])
         return result
     }
 }

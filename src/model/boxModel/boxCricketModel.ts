@@ -23,6 +23,7 @@ export interface BookingBoxModel {
     start_time: string,
     end_time: string,
     // mobile_num: string,
+    amount:string,
     user_id: number,
     slot_id: number,
     box_id: number
@@ -57,7 +58,6 @@ export interface SlotModel{
 }
 
 export interface GetMyBooking {
-    user_id: number,
     box_id: number
 }
 

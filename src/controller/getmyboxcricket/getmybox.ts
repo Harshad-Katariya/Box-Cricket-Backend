@@ -14,6 +14,8 @@ class GetMyBoxCricket {
 
             let result = await DBservice.getmyboxcricketDBservice.getmybox(token_decode)
 
+            console.log("Result - - - >",result);
+            
             if (!result) {
                 return response.setResponse(400, { errorMessage: 'Somthing went wrong' }, res, req)
             }

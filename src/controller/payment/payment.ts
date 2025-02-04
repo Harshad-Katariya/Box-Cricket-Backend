@@ -59,19 +59,20 @@ class Payment{
         try {
 
            /* User Coookie And Token Verify */
-        let cookie_decode:any = CookieParser.UserCookie(req);
-        let token_decode: any = jwt.verify(cookie_decode, process.env.JWT_KEY as string);
+            let cookie_decode:any = CookieParser.UserCookie(req);
+            let token_decode: any = jwt.verify(cookie_decode, process.env.JWT_KEY as string);
         
 
             let result = await DBservice.paymentDBservice.paymentcheck(parseInt(token_decode))
-            console.log("Payment Result Check ======------>", result[0].razorpay_order_id);
+            console.log("Payment Result Check ======------>", result.razorpay_order_id);
 
             const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body
 
-            console.log("Razorpay Order_Id  = = = = = = = == = >", result[0].razorpay_order_id);
+            console.log("Razorpay Order_Id  = = = = = = = == = >", result.razorpay_order_id);
 
-            let cancel_payment = await razorpay.orders.fetchPayments(result[0].razorpay_order_id)
-
+            let cancel_payment = await razorpay.orders.fetchPayments(result.razorpay_order_id)
+            console.log("Cancel Payment - - - - >",cancel_payment);
+            
             const razorpay_key: any = process.env.RAZOR_PAY_SEC
 
             let hmac = crypto.createHmac('sha256', razorpay_key)
@@ -80,9 +81,9 @@ class Payment{
 
             const genrated_signature = hmac.digest('hex')
             if (!razorpay_payment_id) {
-                await DBservice.paymentDBservice.paymentfail(parseInt(token_decode), result[0].payment_id)
-                await DBservice.paymentDBservice.cancelpayment(cancel_payment.items[0].error_description, parseInt(token_decode), parseInt(result[0].payment_id))
-                console.log("Payment Log = = = = = = == = = = = = = = = =>", cancel_payment.items[0])
+                await DBservice.paymentDBservice.paymentfail(parseInt(token_decode), result.payment_id)
+                await DBservice.paymentDBservice.cancelpayment(cancel_payment.items[0].error_description, parseInt(token_decode), parseInt(result.payment_id))
+                console.log("Payment Log = = = = = = == = = = = = = = = =>", cancel_payment.items)
                 return response.setResponse(402, { message: `${cancel_payment.items[0].error_description}` }, res, req)
             }
             if (razorpay_signature == genrated_signature) {
@@ -90,27 +91,34 @@ class Payment{
                 let paymentDetails = await razorpay.payments.fetch(razorpay_payment_id);
                 const capture_amount = paymentDetails.amount
 
+                console.log("Payment Details - - - - - >",paymentDetails);
+                
+
                 let payment_capture = await razorpay.payments.capture(razorpay_payment_id,capture_amount, "INR")
                 if (payment_capture?.id) {
 
                     let payment_order = await razorpay.orders.fetch(razorpay_order_id)
                     let payment = await razorpay.payments.fetch(payment_capture.id)
 
+                    console.log("Payment Order - - - -- >",payment_order);
+                    console.log("Payment - - - - - >",payment);
+                    
+
                     if (payment_order.status == 'paid' && payment.status == 'captured') {
-                        await DBservice.paymentDBservice.paymentcomplate(parseInt(token_decode), result[0].payment_id)
+                        await DBservice.paymentDBservice.paymentcomplate(parseInt(token_decode), result.payment_id)
                     }
                     else {
-                        await DBservice.paymentDBservice.paymentfail(parseInt(token_decode), result[0].payment_id)
-                        await DBservice.paymentDBservice.cancelpayment(cancel_payment.items[0].error_description, parseInt(token_decode), parseInt(result[0].payment_id))
-                        response.setResponse(402, { message: 'Payment Fail...' }, res, req)
+                        await DBservice.paymentDBservice.paymentfail(parseInt(token_decode), result.payment_id)
+                        await DBservice.paymentDBservice.cancelpayment(cancel_payment.items[0].error_description, parseInt(token_decode), parseInt(result.payment_id))
+                        return response.setResponse(402, { message: 'Payment Fail...' }, res, req)
                     }
                 }
                 response.setResponse(200, { message: 'Payment Verify...' }, res, req)
             }
             else {
                 response.setResponse(400, { message: 'Payment Fail....' }, res, req)
-                await DBservice.paymentDBservice.paymentfail(parseInt(token_decode), result[0].payment_id)
-                await DBservice.paymentDBservice.cancelpayment(cancel_payment.items[0].error_description, parseInt(token_decode), parseInt(result[0].payment_id))
+                await DBservice.paymentDBservice.paymentfail(parseInt(token_decode), result.payment_id)
+                await DBservice.paymentDBservice.cancelpayment(cancel_payment.items[0].error_description, parseInt(token_decode),result.payment_id)
             }
         } catch (error) {
 
@@ -119,6 +127,7 @@ class Payment{
         }
 
     }
+
 }
 
 export const payment = new Payment()

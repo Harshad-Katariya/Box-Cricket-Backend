@@ -7,7 +7,7 @@ import { BookingBoxModel } from '../../model/boxModel/boxCricketModel'
 import { writeConnection } from "../../config/writeDbConnection";
 import { CookieParser } from "../../comman/cookies";
 import { MailServiceBooking } from "../../helper/mail/bookingMail";
-import { BookingNumGenrate } from '../../helper/custom'
+import { BookingNumGenerate } from '../../helper/custom'
 
 class BookingBoxCricket{
 
@@ -31,10 +31,11 @@ class BookingBoxCricket{
           
           /* Booking Box Model */
           const bookingBox: BookingBoxModel = {
-            booking_num: BookingNumGenrate(4),
+            booking_num: BookingNumGenerate(),
             booking_date:TimeConvert.booking_date,
             start_time:TimeConvert.start_time,
             end_time:TimeConvert.end_time,
+            amount:req.body.amount,
             user_id: parseInt(token_decode),
             slot_id:parseInt(req.body.slot_id),
             box_id: parseInt(req.body.box_id)
@@ -72,7 +73,7 @@ class BookingBoxCricket{
               let find_user = await DBservice.userDBservice.finduser(parseInt(token_decode))
               console.log("date  = = =>0",booking_date);
           
-              MailServiceBooking(find_user[0].email, find_user[0].username, bookingBox.booking_num,moment(booking_date).format('DD-MM-YYYY'), start_time, end_time, find_box.address,find_box.slot_name,find_box.title, find_box.latitude, find_box.longitude)
+              // MailServiceBooking(find_user[0].email, find_user[0].username, bookingBox.booking_num,moment(booking_date).format('DD-MM-YYYY'), start_time, end_time, find_box.address,find_box.slot_name,find_box.title, find_box.latitude, find_box.longitude)
               await writeConnection.commit()
               response.setResponse(200, { SuccessMessage: 'Success', data: bookingBox }, res, req)
             }

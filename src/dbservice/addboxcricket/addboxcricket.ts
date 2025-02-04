@@ -69,11 +69,17 @@ export class Add_Box_Cricket extends CommanDBService {
         return result[0]
     }
     public async getallboxcricket(data: any): Promise<any> {
-
+        
+        await writeConnection.insert('SET GLOBAL group_concat_max_len = 100000000;',[])
         let get_all_box_cricket_qurey = "SELECT tb.box_id,tb.title,tb.open_time,tb.close_time,tb.address,tls.slot_media,tls.price,tb.contact_num,tc.city_name,ts.state_name FROM tbl_box AS tb LEFT JOIN tbl_city AS tc ON tc.city_id = tb.city_id LEFT JOIN tbl_state AS ts ON ts.state_id = tb.state_id LEFT JOIN tbl_slot AS tls ON tls.box_id = tb.box_id GROUP BY tb.box_id";
 
+
         let result = await readConnection.select(get_all_box_cricket_qurey, [data]);
-    
+        
+        if(data.q){
+            get_all_box_cricket_qurey += ` OR lower(tb.title) LIKE "%${data.q.trim()}%"`
+        }
+
         return result
     }
     public async getboxcricketbyid(box_id: number): Promise<any> {

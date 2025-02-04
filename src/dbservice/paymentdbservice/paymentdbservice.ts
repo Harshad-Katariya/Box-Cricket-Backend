@@ -19,7 +19,7 @@ export class PaymentDBService extends CommanDBService{
 
         let result = await readConnection.select(payment_check,[user_id])
 
-        return result
+        return result[0]
     }
 
     public async paymentcomplate (user_id: any,payment_id:number): Promise<any> {
