@@ -3,135 +3,17 @@ package-lock.json
 .env
 
 
-  // while(k < avalableData.length){
-        //     console.log("k===",k)
-        //     i = k
-        //     let slot_start = avalableData[i]['slot_start']
-        //     console.log("slot_start--->",slot_start)
+ // let get_box_cricket = await DBservice.addboxDBservice.walletget(result['box_id'])
+                        // console.log("Get Box Cricket - - - - >", get_box_cricket);
 
-        //     if (avalableData[i] && avalableData[i + 1] && avalableData[i].slot_end === avalableData[i + 1].slot_start && hour >= 2){
-        //         i = i + 1
-        //         console.log("i===",i)
-        //         if( avalableData[i] && avalableData[i + 1] && avalableData[i].slot_end === avalableData[i + 1].slot_start && hour >= 3){
-        //             i = i + 1
-        //             console.log("i=1111==",i)
-        //             result.push({
-        //                 "slot_date": "2024-12-18T18:30:00.000Z",
-        //                 "box_id": 1,
-        //                 "slot_start":slot_start,
-        //                 "slot_end": avalableData[i].slot_end,
-        //                 "close_time": "23:00:00",
-        //                 "slot_status": "Available"               
-        //             })
-        //             k = i
-        //         }else if(hour >= 2){
-        //             result.push({
-        //                     "slot_date": "2024-12-18T18:30:00.000Z",
-        //                     "box_id": 1,
-        //                     "slot_start":slot_start,
-        //                     "slot_end": avalableData[i].slot_end,
-        //                     "close_time": "23:00:00",
-        //                     "slot_status": "Available"               
-        //             })
-        //             k = i
-        //         }
-        //     }
-        //     k++
-        // }
+                        // let wallet_amount = get_box_cricket["wallet"] != null ? Number(get_box_cricket["wallet"]) : null;
+                        // let payment_amount = Number(result["payment_amount"]);
+                        // let gstsubstct = payment_amount / 1.18
+                        // let wallet_amount_sum = wallet_amount !== null ? wallet_amount + gstsubstct : payment_amount;
+                        // console.log("Wallet amount test -  - - - >", payment_amount,gstsubstct,wallet_amount_sum);
 
+                        // const wallet_payload = {
+                        //     wallet: wallet_amount_sum.toFixed(2),
+                        //     box_id: parseInt(result["box_id"])
+                        // }
 
-
-
-        # while(k < avalableData.length){
-        #      console.log("k===",k)
-        #      i = k
-        #      let slot_start = moment(avalableData[i]['slot_start'],'HH:mm').format('hh:mm A')
-        #      console.log("slot_start--->",avalableData[i]['slot_start'])
-        #      let j = 0
-        #      while(j < hour - 1){
-        #          console.log("j--->",j,hour -1)
-        #          console.log("iiiiiiii",i)
-        #          console.log(avalableData[i],avalableData[i + 1],avalableData[i].slot_end === avalableData[i + 1].slot_start,moment(avalableData[i]['slot_date']).format('YYYY-MM-DD') ==  moment(avalableData[i+1]['slot_date']).format('YYYY-MM-DD'))
-        #          console.log(avalableData[i].slot_end === avalableData[i + 1]['slot_start']);
-                 
-        #          if (avalableData[i] && avalableData[i + 1] && avalableData[i].slot_end === avalableData[i + 1].slot_start && moment(avalableData[i]['slot_date']).format('YYYY-MM-DD') ==  moment(avalableData[i+1]['slot_date']).format('YYYY-MM-DD')){
-                     
-        #              console.log("true")
-        #              console.log("Hours Bro====>",hour,' ',(j+2))
-        #              console.log("Check Hour Conddtion = = =>",hour == (j+2));
-                     
-        #              if(hour == (j+2)){
-        #                  console.log("hiiiii")
-        #                  result.push({
-        #                      "slot_date":moment(avalableData[i]['slot_date']).format('DD-MM-YYYY'),
-        #                      "box_id": avalableData[i].box_id,
-        #                      "slot_start":slot_start,
-        #                      "slot_end": moment(avalableData[i + 1].slot_end,'HH:mm').format('hh:mm A'),
-        #                      "slot_status": "Available"               
-        #                  })
-        #              }
-        #              i = i + 1
-        #              k = i
-        #          }
-        #          j++
-        #      }
-        #      k++
-        #  }
-
-
-         WITH DateRange AS (
-    SELECT CURDATE() + INTERVAL (d1.n + d2.n * 10) DAY AS slot_date
-    FROM (
-        SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
-        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
-    ) d1,
-    (
-        SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
-        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
-    ) d2
-    WHERE CURDATE() + INTERVAL (d1.n + d2.n * 10) DAY <= DATE_ADD(CURDATE(), INTERVAL 30 DAY)
-),
-TimeSlots AS (
-    SELECT 
-        dr.slot_date,
-        tb.box_id,
-        tsl.slot_id,
-        ADDTIME(tb.open_time, MAKETIME(hours.n, 0, 0)) AS slot_start,
-        ADDTIME(tb.open_time, MAKETIME(hours.n + 1, 0, 0)) AS slot_end,
-        tb.close_time
-    FROM 
-        DateRange AS dr
-    JOIN 
-        tbl_box AS tb ON tb.box_id = 1
-    JOIN 
-        tbl_slot AS tsl ON tsl.box_id = tb.box_id
-    CROSS JOIN (
-        SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
-        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
-        UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12 UNION ALL SELECT 13 UNION ALL SELECT 14
-    ) AS hours
-    WHERE 
-        ADDTIME(tb.open_time, MAKETIME(hours.n, 0, 0)) <= tb.close_time
-)
-SELECT 
-    ts.*,
-    CASE 
-        WHEN NOW() > CONCAT(ts.slot_date, ' ', ts.slot_start) THEN 'Over Time'
-        WHEN EXISTS (
-            SELECT 1
-            FROM tbl_booking AS tbo
-            WHERE 
-                tbo.slot_id = ts.slot_id
-                AND tbo.booking_date = ts.slot_date
-                AND (
-                    tbo.start_time < ts.slot_end AND tbo.end_time > ts.slot_start
-                )
-        ) THEN 'Booked'
-        ELSE 'Available'
-    END AS slot_status
-FROM 
-    TimeSlots AS ts
-WHERE 
-    ts.slot_date = '2024-12-20' AND ts.slot_id = 1
-ORDER BY 
-    ts.slot_date, ts.slot_start;

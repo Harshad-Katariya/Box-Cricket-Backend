@@ -98,7 +98,14 @@ export class Add_Box_Cricket extends CommanDBService {
 
         return result
     }
+    public async walletget (box_id:number):Promise<any>{
 
+        let wallet_qurey = 'SELECT * FROM tbl_box WHERE box_id = ?'
+
+        let result = await readConnection.select(wallet_qurey, [box_id])
+
+        return result[0]
+    }
 
 
     /* Update */

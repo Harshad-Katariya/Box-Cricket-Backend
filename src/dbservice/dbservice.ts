@@ -8,7 +8,8 @@ import { Box_Media } from "./boxmedia/boxmediadbservice";
 import { Amenities } from "./amenities/amenitiesdbservice";
 import { City} from './citydbservice/citydbservice';
 import { State} from './statedbservice/statedbservice';
-import {PaymentDBService} from './paymentdbservice/paymentdbservice'
+import {PaymentDBService} from './paymentdbservice/paymentdbservice';
+import {CancelbookingDBService} from  './cancelbookingdbservice/cancelbookingdbservice'
  class DBService{
 
     constructor(
@@ -22,8 +23,9 @@ import {PaymentDBService} from './paymentdbservice/paymentdbservice'
         public amenitiesDBservice :Amenities,
         public cityDBservice : City,
         public stateDBservice : State,
-        public paymentDBservice : PaymentDBService
+        public paymentDBservice : PaymentDBService,
+        public cancelbookingDBservice : CancelbookingDBService
     ){}
 }
 
-export const DBservice = new DBService(new UserDBService(), new BookingDBService(), new Add_Box_Cricket(), new Add_Box_Slot(), new Available_Time(), new Get_My_Box_Cricket(),new Box_Media(),new Amenities(), new City(), new State(), new PaymentDBService())
+export const DBservice = new DBService(new UserDBService(), new BookingDBService(), new Add_Box_Cricket(), new Add_Box_Slot(), new Available_Time(), new Get_My_Box_Cricket(),new Box_Media(),new Amenities(), new City(), new State(), new PaymentDBService(), new CancelbookingDBService())

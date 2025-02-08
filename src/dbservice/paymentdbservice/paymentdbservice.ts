@@ -47,4 +47,21 @@ export class PaymentDBService extends CommanDBService{
 
         return result
     }
+
+    public async transaction (data:any): Promise<any>{
+       
+        let transaction_qurey = 'INSERT INTO tbl_transaction SET ?'
+
+        let result = await writeConnection.insert(transaction_qurey,[data])
+
+        return result
+    }
+    public async wallet (wallet:any,box_id:number): Promise<any>{
+
+        let wallter_qurey = "UPDATE tbl_box SET wallet = ? WHERE box_id = ?";
+
+        let result = await writeConnection.update(wallter_qurey,[wallet,box_id]);
+
+        return result
+    }
 }

@@ -80,19 +80,17 @@ class Available_Time {
             let { date, hours, slot_id, box_id }: any = req.query;
     
             let get_avalible_time = await DBservice.availableDBservice.getavalibletime(date, box_id, slot_id);
-            // console.log('get_avalible_time >', get_avalible_time);
     
             // Show Only Available Slots
             const Available_Slot = get_avalible_time.filter(item => item.slot_status === "Available");
             let result = [];
-            
+    
             let hour = parseInt(hours);
     
             let box_cricket = await DBservice.addboxDBservice.getboxcricketbyid(box_id);
             let box_open_time = box_cricket[0].open_time;
             let box_close_time = box_cricket[0].close_time;
-          
-
+    
             // Convert booked slots to moment intervals for easier overlap checks
             const bookedSlots = get_avalible_time
                 .filter(item => item.slot_status !== "Available")
@@ -111,16 +109,16 @@ class Available_Time {
                     const isWithinBoxTimings =
                         slot_start.isBetween(moment(box_open_time, 'HH:mm'), moment(box_close_time, 'HH:mm'), null, '[)') &&
                         slot_end.isBetween(moment(box_open_time, 'HH:mm'), moment(box_close_time, 'HH:mm'), null, '(]');
-                    
+    
                     const isOverlapping = bookedSlots.some(booked =>
                         slot_start.isBefore(booked.end) && slot_end.isAfter(booked.start)
                     );
-    
                     if (isWithinBoxTimings && !isOverlapping) {
+                        let priceWithTax = parseInt(Available_Slot[0]['price']) * 18 / 100 + parseInt(Available_Slot[0]['price']);
                         result.push({
                             "slot_start": slot_start.format('hh:mm A'),
                             "slot_end": slot_end.format('hh:mm A'),
-                            "price":Available_Slot[0]['price'] * hour,
+                            "price":hour * priceWithTax, // Ensure two decimal places
                             "slot_status": "Available"
                         });
                     }
@@ -136,16 +134,17 @@ class Available_Time {
                     const isWithinBoxTimings =
                         slot_start.isBetween(moment(box_open_time, 'HH:mm'), moment(box_close_time, 'HH:mm'), null, '[)') &&
                         slot_end.isBetween(moment(box_open_time, 'HH:mm'), moment(box_close_time, 'HH:mm'), null, '(]');
-                    
+    
                     const isOverlapping = bookedSlots.some(booked =>
                         slot_start.isBefore(booked.end) && slot_end.isAfter(booked.start)
                     );
     
                     if (isWithinBoxTimings && !isOverlapping) {
+                        let priceWithTax = parseInt(Available_Slot[i]['price']) * 18 / 100 + parseInt(Available_Slot[i]['price']);
                         result.push({
                             "slot_start": slot_start.format('hh:mm A'),
                             "slot_end": slot_end.format('hh:mm A'),
-                            "price": parseInt(Available_Slot[0]['price']),
+                            "price": priceWithTax, // Ensure two decimal places
                             "slot_status": Available_Slot[i]['slot_status']
                         });
                     }
@@ -162,6 +161,7 @@ class Available_Time {
             response.setResponse(500, { errorMessage: 'Internal Server Error.' }, res, req);
         }
     }
+    
     
     
 }

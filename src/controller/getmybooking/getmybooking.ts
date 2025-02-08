@@ -16,17 +16,11 @@ class Get_My_Booking {
         if (!errors.isEmpty()) {
            return response.setResponse(400, { message: errors.array() }, res, req)
         }
-        
         try {
-            /* User Coookie And Token Verify */
-            // let cookie_decode: any = CookieParser.UserCookie(req);
-            // let token_decode: any = jwt.verify(cookie_decode, process.env.JWT_KEY as string);
-
             let data = req.query
             let resp:any = []
             let result = await DBservice.bookDbservice.getmybooking(data.box_id,data)
 
-            
             let i=0;
             while(i < result.length){
                 let result_data = result[i]
@@ -35,14 +29,12 @@ class Get_My_Booking {
                     booking_date: moment(result_data['booking_date'],'YYYY-MM-DD').format('DD-MM-YYYY'),
                     start_time: moment(result_data['start_time'],'HH:mm').format('hh:mm A'),
                     end_time: moment(result_data['end_time'],'HH:mm').format('hh:mm A'),
-                    amount:result_data['amount'],
+                    amount:parseInt(result_data['amount']),
                     slot_name: result_data['slot_name'],
                     username: result_data['username'],
-                    // mobile_num: result_data['mobile_num']
                 })
                 i++;
             }
-        
             if(!result){
                return response.setResponse(400,{errorMessage:'Somthing wengt wrong'},res,req)
             }
@@ -60,14 +52,11 @@ class Get_My_Booking {
             }
             else{
                 response.setResponse(200,{SuccessMessage:'Success',data:resp},res,req)
-            }
-
-            
+            }    
         } catch (error) {
             console.log("Get My Booking Error = = = =>",error);
            return response.setResponse(500,{errorMessage:'Internal Server Error'},res,req)
-        }
-       
+        }       
     }
 
     public async getboxcricketbiyid (req:Request,res:Response): Promise<any>{

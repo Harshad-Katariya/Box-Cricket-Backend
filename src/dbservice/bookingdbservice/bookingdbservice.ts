@@ -1,7 +1,6 @@
 import { readConnection } from "../../config/readDbConnection";
 import { writeConnection } from "../../config/writeDbConnection";
 import { CommanDBService } from "../commandbservice";
-import { DBservice } from "../dbservice";
 import moment from "moment";
 
 export class BookingDBService extends CommanDBService {

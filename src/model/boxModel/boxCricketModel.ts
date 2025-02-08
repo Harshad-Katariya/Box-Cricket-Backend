@@ -22,8 +22,7 @@ export interface BookingBoxModel {
     booking_date: string,
     start_time: string,
     end_time: string,
-    // mobile_num: string,
-    amount:string,
+    amount:number,
     user_id: number,
     slot_id: number,
     box_id: number
@@ -64,21 +63,17 @@ export interface GetMyBooking {
 export interface GetAllBoxCricket {
     box_id:number,
     title:string,
-    box_image: string,
     open_time:string,   
     close_time: string,
     address:string,
-    slot_id:number,
-    slot_name:string,
-    width:number,
-    height:number,
-    length:number,
+    slot_media: string[] | [],
     price:number,
     contact_num:string,
     city_name:string,
     state_name:string,
     country_name:string
 }
+
 
 export interface BoxMedia {
     user_id:number,
@@ -100,9 +95,16 @@ export interface GetboxCricketById{
 
 }
 
+
 /* Update Box Cricket Model */
 export interface UpdateTimeModel {
     open_time: string,
     close_time: string,
     box_id: number,
+}
+
+export interface CancelbookingModel{
+    box_id:number,
+    slot_id:number,
+    user_id:number
 }

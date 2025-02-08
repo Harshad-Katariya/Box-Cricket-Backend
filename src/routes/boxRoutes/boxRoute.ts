@@ -39,6 +39,15 @@ class BoxRoute{
         /* Get My Box Cricket Route */
         this.route.get('/myboxcricket',Get_my_box_cricket.getmyboxcricket)
 
+        /* Get My Box Cricket Wallet Route */
+        this.route.get('/mywallet',Get_my_box_cricket.getmywallet)
+
+        /* Balance */
+        this.route.post("/withdrawa",Get_my_box_cricket.withdrawa_balance)
+
+        /* Transaction History Route*/
+        this.route.get('/transaction-history',Get_my_box_cricket.transaction_history)
+
         /* Manual Booking Box Cricket Route*/
         this.route.post('/manualbooking',manual_booking.manualbooking)
 
