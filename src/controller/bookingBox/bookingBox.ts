@@ -73,7 +73,7 @@ class BookingBoxCricket{
               let find_user = await DBservice.userDBservice.finduser(parseInt(token_decode))
               console.log("date  = = =>0",booking_date);
           
-              // MailServiceBooking(find_user[0].email, find_user[0].username, bookingBox.booking_num,moment(booking_date).format('DD-MM-YYYY'), start_time, end_time, find_box.address,find_box.slot_name,find_box.title, find_box.latitude, find_box.longitude)
+              MailServiceBooking(find_user[0].email, find_user[0].username, bookingBox.booking_num,moment(booking_date).format('DD-MM-YYYY'), start_time, end_time, find_box.address,find_box.slot_name,find_box.title, find_box.latitude, find_box.longitude)
               await writeConnection.commit()
               response.setResponse(200, { SuccessMessage: 'Success', data: bookingBox }, res, req)
             }

@@ -11,68 +11,59 @@ import indexRoute from './Routes/indexRoute';
 
 dotenv.config()
 const corsOptions = {
-    origin: "http://harshad.com:7000", 
+    origin: "http://harshad.com:7000",
     credentials: true,
-  };
+};
 
 const originalPath = path.resolve(__dirname, '../Uploads'); // Adjust the relative path
-const iconpath = path.resolve(__dirname,'../icon')
-export default class Server
-{
-    public app:Application
+const iconpath = path.resolve(__dirname, '../icon')
+export default class Server {
+    public app: Application
 
-    constructor()
-    {
+    constructor() {
         this.app = express()
         this.config();
         this.routes();
     }
-    config():void
-    {
-        this.app.set('port',process.env.PORT_NUM || 7000)
-          var accessLogStream = rfs.createStream('access.log',
-        {
-            interval:'1d',
-            path: path.join(__dirname, 'log')
-        })
-       
-        this.app.use(morgan('combined',{stream: accessLogStream}));
+    config(): void {
+        this.app.set('port', process.env.PORT_NUM || 7000)
+        var accessLogStream = rfs.createStream('access.log',
+            {
+                interval: '1d',
+                path: path.join(__dirname, 'log')
+            })
+
+        this.app.use(morgan('combined', { stream: accessLogStream }));
         this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }))
         this.app.use(cookieParser())
-        this.app.use(bodyParser.urlencoded({extended:true}))
+        this.app.use(bodyParser.urlencoded({ extended: true }))
         this.app.use(cors(corsOptions))
         this.app.set("view engine", "ejs")
         this.app.set("views", __dirname + "/views")
-        this.app.use('/uploads',express.static(originalPath))
-        this.app.use('/icon',express.static(iconpath))
+        this.app.use('/uploads', express.static(originalPath))
+        this.app.use('/icon', express.static(iconpath))
         this.app.use(express.static(path.join(__dirname, 'public')));
-        this.app.use((req:Request,res:Response,next:NextFunction) =>
-        {
-            bodyParser.json()(req,res,err =>
-            {
-                if(err)
-                {
+        this.app.use((req: Request, res: Response, next: NextFunction) => {
+            bodyParser.json()(req, res, err => {
+                if (err) {
                     console.log(err);
-                    return res.status(400).send({message: 'Invalid input found'})
+                    return res.status(400).send({ message: 'Invalid input found' })
                 }
                 next();
             });
         });
-      
+
     }
-    routes():void
-    {
-        this.app.use('/',indexRoute)
+    routes(): void {
+        this.app.use('/', indexRoute)
         this.app.all('*', function (req, res) {
             res.status(404).send({ message: '404! Page not found' });
         });
     }
-    start():void
-    {
-        this.app.listen(this.app.get('port'), process.env.HOST as string, () =>
-        {
-            console.log('Server Is Running On :-','http' + ':' + '//' + process.env.HOST + ':' +  process.env.PORT_NUM);
+    start(): void {
+        this.app.listen(this.app.get('port'), process.env.HOST as string, () => {
+            console.log('Server Is Running On :-', 'http' + ':' + '//' + process.env.HOST + ':' + process.env.PORT_NUM);
         })
         process.on('uncaughtException', (error) => {
             console.log('Oh my god, something terrible happened: ', error);
@@ -85,5 +76,5 @@ export default class Server
         });
     }
 }
- const server = new Server();
- server.start();
+const server = new Server();
+server.start();

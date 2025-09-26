@@ -2,18 +2,3 @@ node_modules
 package-lock.json
 .env
 
-
- // let get_box_cricket = await DBservice.addboxDBservice.walletget(result['box_id'])
-                        // console.log("Get Box Cricket - - - - >", get_box_cricket);
-
-                        // let wallet_amount = get_box_cricket["wallet"] != null ? Number(get_box_cricket["wallet"]) : null;
-                        // let payment_amount = Number(result["payment_amount"]);
-                        // let gstsubstct = payment_amount / 1.18
-                        // let wallet_amount_sum = wallet_amount !== null ? wallet_amount + gstsubstct : payment_amount;
-                        // console.log("Wallet amount test -  - - - >", payment_amount,gstsubstct,wallet_amount_sum);
-
-                        // const wallet_payload = {
-                        //     wallet: wallet_amount_sum.toFixed(2),
-                        //     box_id: parseInt(result["box_id"])
-                        // }
-
