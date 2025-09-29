@@ -2,206 +2,207 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You for Booking</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #ffffff;
-      color:#000000;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Booking</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+        }
 
-    .header {
-      background: #000000;
-      color: #ffffff;
-      text-align: center;
-      padding: 20px;
-    }
+        .header {
+            background: #000000;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
 
-    .header h1 {
-      font-size: 24px;
-      margin: 0;
-    }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
 
-    .content {
-      padding: 15px;
-      text-align: left;
-    }
+        .content {
+            padding: 15px;
+            text-align: left;
+        }
 
-    .content h2 {
-      color: #000000;
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
+        .content h2 {
+            color: #000000;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
 
-    .content p {
-      margin-bottom: 10px;
-      line-height: 1.6;
-      font-size: 14px;
-    }
+        .content p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
 
-    .details {
-      background: #f9fafb;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      margin-bottom: 15px;
-    }
+        .details {
+            background: #f9fafb;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
 
-    .details p {
-      margin: 5px 0;
-      font-size: 13px;
-    }
+        .details p {
+            margin: 5px 0;
+            font-size: 13px;
+        }
 
-    .details strong {
-      color: #000000;
-    }
+        .details strong {
+            color: #000000;
+        }
 
-    .button {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        .button {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .button a {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #000000;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 14px;
-      font-weight: bold;
-      margin: 5px;
-      transition: all 0.3s;
-    }
+        .button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 5px;
+            transition: all 0.3s;
+        }
 
-    .button a:hover {
-      background: #7c7c7c;
-    }
+        .button a:hover {
+            background: #7c7c7c;
+        }
 
-    .footer-like {
-      margin-top: auto;
-      background: #000000;
-      padding: 10px;
-      text-align: center;
-    }
+        .footer-like {
+            margin-top: auto;
+            background: #000000;
+            padding: 10px;
+            text-align: center;
+        }
 
-    .footer-like p {
-      margin: 0;
-      font-size: 12px;
-      color: #ffffff;
-      font-family: 'Arial', sans-serif;
-      letter-spacing: 1px;
-    }
+        .footer-like p {
+            margin: 0;
+            font-size: 12px;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+        }
 
-    .footer-like p a {
-      text-decoration: none;
-      color: #5892FF;
-      font-weight: 600;
-    }
+        .footer-like p a {
+            text-decoration: none;
+            color: #5892FF;
+            font-weight: 600;
+        }
 
-    .wrapper-1 {
-      margin: 20px auto;
-      max-width: 90%;
-      display: flex;
-      flex-direction: column;
-      background: #ffffff;
-    }
+        .wrapper-1 {
+            margin: 20px auto;
+            max-width: 90%;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+        }
 
-    .wrapper-2 {
-      border: 2px solid #000000;
-      padding: 15px;
-      text-align: center;
-    }
+        .wrapper-2 {
+            border: 2px solid #000000;
+            padding: 15px;
+            text-align: center;
+        }
 
-    .go-home {
-      color: #fff;
-      background: #5892FF;
-      border: none;
-      padding: 10px 50px;
-      margin: 20px 0;
-      border-radius: 30px;
-      text-transform: capitalize;
-      box-shadow: 0 10px 16px 1px rgba(174, 199, 251, 1);
-    }
+        .go-home {
+            color: #fff;
+            background: #5892FF;
+            border: none;
+            padding: 10px 50px;
+            margin: 20px 0;
+            border-radius: 30px;
+            text-transform: capitalize;
+            box-shadow: 0 10px 16px 1px rgba(174, 199, 251, 1);
+        }
 
-    @media (min-width: 600px) {
-      .wrapper-1 {
-        max-width: 500px;
-      }
+        @media (min-width: 600px) {
+            .wrapper-1 {
+                max-width: 500px;
+            }
 
-      .header h1 {
-        font-size: 28px;
-      }
+            .header h1 {
+                font-size: 28px;
+            }
 
-      .content h2 {
-        font-size: 20px;
-      }
+            .content h2 {
+                font-size: 20px;
+            }
 
-      .content p,
-      .details p {
-        font-size: 15px;
-      }
+            .content p,
+            .details p {
+                font-size: 15px;
+            }
 
-      .button a {
-        padding: 12px 25px;
-        font-size: 16px;
-      }
-    }
+            .button a {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+        }
 
-    @media (min-width: 768px) {
-      .wrapper-1 {
-        max-width: 530px;
-      }
+        @media (min-width: 768px) {
+            .wrapper-1 {
+                max-width: 530px;
+            }
 
-      .content {
-        padding: 20px;
-      }
+            .content {
+                padding: 20px;
+            }
 
-      .content h2 {
-        font-size: 22px;
-      }
+            .content h2 {
+                font-size: 22px;
+            }
 
-      .button a {
-        font-size: 16px;
-      }
-    }
-  </style>
+            .button a {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <div class="content">
-    <div class="wrapper-1">
-      <div class="wrapper-2">
-        <div class="header">
-          <h1>Thank You for Booking!</h1>
+    <div class="content">
+        <div class="wrapper-1">
+            <div class="wrapper-2">
+                <div class="header">
+                    <h1>Thank You for Booking!</h1>
+                </div>
+                <div class="content">
+                    <h2>Booking Confirmation</h2>
+                    <p>Hello <strong>{username}</strong>,</p>
+                    <p>We are thrilled to confirm your booking. Please find the details below:</p>
+                    <div class="details">
+                        <p><strong>Booking ID :-</strong> {booking_num}</p>
+                        <p><strong>Date :-</strong> {booking_date}</p>
+                        <p><strong>Time :-</strong> {start_time} To {end_time}</p>
+                        <p><strong>Box Cricket :-</strong> {title}</p>
+                        <p><strong>Slot :-</strong> {slot_name}</p>
+                        <p><strong>Venue :-</strong> {address}</p>
+                    </div>
+                    <p>If you have any questions, please don’t hesitate to contact us.</p>
+                    <div class="button">
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=&destination={latitude},{longitude}">View
+                            on Google Maps</a>
+                    </div>
+                </div>
+                <div class="footer-like">
+                    <p>&copy; {year}. All rights reserved.</p>
+                </div>
+            </div>
         </div>
-        <div class="content">
-          <h2>Booking Confirmation</h2>
-          <p>Hello <strong>{username}</strong>,</p>
-          <p>We are thrilled to confirm your booking. Please find the details below:</p>
-          <div class="details">
-            <p><strong>Booking ID :-</strong> {booking_num}</p>
-            <p><strong>Date :-</strong> {booking_date}</p>
-            <p><strong>Time :-</strong> {start_time} To {end_time}</p>
-            <p><strong>Box Cricket :-</strong> {title}</p>
-            <p><strong>Slot :-</strong> {slot_name}</p>
-            <p><strong>Venue :-</strong> {address}</p>
-          </div>
-          <p>If you have any questions, please don’t hesitate to contact us.</p>
-          <div class="button">
-            <a href="https://www.google.com/maps/dir/?api=1&origin=&destination={latitude},{longitude}">View on Google Maps</a>
-          </div>
-        </div>
-        <div class="footer-like">
-          <p>&copy; {year}. All rights reserved.</p>
-        </div>
-      </div>
     </div>
-  </div>
 </body>
 
 </html>
