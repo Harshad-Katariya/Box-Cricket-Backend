@@ -4,7 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +27,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.11.4",
     "nodemailer": "^6.9.16",
+    "nodemon": "^3.1.10",
     "razorpay": "^2.9.5",
     "reflect-metadata": "^0.2.2",
     "rotating-file-stream": "^3.2.5",
